@@ -8,7 +8,12 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+
 ```
+### finish server
+ctrl+c N
+
+``
 
 ### Compiles and minifies for production
 ```
