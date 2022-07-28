@@ -1,8 +1,20 @@
 <template>
   <div class="">
-    <TheHeader>
+    <TheHeader
+    v-show="showHeader">
 
     </TheHeader>
+  <div v-if="level === 'admin'">
+    Admin
+  </div>
+  <div v-else-if="level === 'marketing'">
+  Marketing
+  </div>
+<div v-else>
+  Normal
+</div>
+
+
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
@@ -17,6 +29,14 @@ export default {
   components: {
     HelloWorld,
     TheHeader //tem que importar e declarar em components
+  },
+  data() {
+    return{
+      showHeader: true,
+      name: 'Samuel',
+      level: 'normal'
+
+    }
   }
 }
 </script>
