@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-bind:key="obj.id" v-for="obj in todos" class="todos-item">
+    <div :key="obj.id" v-for="(obj, index) in todos" class="todos-item">
+      <!-- v-bind (pode usar só pelos dois pontos) diz ao atributo que ele é dinamico( tem um valor) -->
+      <img v-if="obj.img" :src="obj.img" alt="" />
+      {{ index }} -
       {{ obj.name }}
     </div>
   </div>
@@ -17,6 +20,8 @@ export default {
           name: "Leanne Graham",
           username: "Bret",
           email: "Sincere@april.biz",
+          img: "https://via.placeholder.com/150",
+
           address: {
             street: "Kulas Light",
             suite: "Apt. 556",
@@ -39,6 +44,7 @@ export default {
           id: 2,
           name: "Ervin Howell",
           username: "Antonette",
+          img: "https://via.placeholder.com/150",
           email: "Shanna@melissa.tv",
           address: {
             street: "Victor Plains",
@@ -61,6 +67,7 @@ export default {
         {
           id: 3,
           name: "Clementine Bauch",
+          img: "https://via.placeholder.com/150",
           username: "Samantha",
           email: "Nathan@yesenia.net",
           address: {
@@ -134,12 +141,11 @@ export default {
 </script>
 
 <style>
-
-.todos-item{
-    background-color:black ;
-    color: aliceblue;
-    margin: 0 0 5px 0;
-    padding: 3px;
+.todos-item {
+  background-color: black;
+  color: aliceblue;
+  margin: 0 0 5px 0;
+  padding: 3px;
 }
 
 .header {
@@ -153,6 +159,6 @@ export default {
 
   color: #2c3e50;
   margin-top: 60px;
-  margin:60px;
+  margin: 60px;
 }
 </style>
