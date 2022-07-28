@@ -1,5 +1,29 @@
 <template>
   <div>
+    <h1 :class="{ title: true, 'title-home': isHome }">Curso Vue 3</h1>
+
+    <p :class="['text']">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially
+      unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    </p>
+
+    <p :style="{'color':'aquamarine', backgroundColor: 'black'}">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially
+      unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem Ipsum
+    </p>
+
     <div :key="obj.id" v-for="(obj, index) in todos" class="todos-item">
       <!-- v-bind (pode usar só pelos dois pontos) diz ao atributo que ele é dinamico( tem um valor) -->
       <img v-if="obj.img" :src="obj.img" alt="" />
@@ -14,6 +38,9 @@ export default {
   data() {
     return {
       name: "Samuel",
+      classVar: "title",
+      isHome: false,
+      pClass: "text",
       todos: [
         {
           id: 1,
@@ -141,12 +168,26 @@ export default {
 </script>
 
 <style>
+.title {
+  font-size: 20px;
+  color: blue;
+}
+
+.title-home {
+  color: black;
+}
+
 .todos-item {
   background-color: black;
   color: aliceblue;
   margin: 0 0 5px 0;
   padding: 3px;
 }
+
+.text{
+    color:gray;
+}
+
 
 .header {
   background-color: black;
