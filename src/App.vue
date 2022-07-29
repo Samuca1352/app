@@ -1,29 +1,41 @@
 <template>
-  <div class="">
-    <BaseCard>
-    </BaseCard>
-    <div class="card">
-      Teste
-    </div>
+  <div>
+    
+    
+    <BaseAlert :variant="variant" >Olá Mundo</BaseAlert> 
   </div>
 </template>
 
 <script>
 
-import BaseCard from '@/components/BaseCard';
+import BaseAlert from '@/components/BaseAlert';
 
 
 export default {
   name: 'App',
   components: {
-    BaseCard
+    BaseAlert
     
   },
+
+  data(){
+    return{
+      variant:'success'
+    }
+  }
 
 
 }
 </script>
 
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
+  color: #2c3e50;
+  margin-top: 60px;
+  margin: 60px;
+}
 </style>
