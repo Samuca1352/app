@@ -1,7 +1,14 @@
 <template>
   <div class="">
     <TheHeader>
+      <template v-slot:title >
+      Home
+      </template>
+      <template v-slot:dsc>
+      <p>Teste</p>
+      </template>
   </TheHeader>
+  
 
 
 

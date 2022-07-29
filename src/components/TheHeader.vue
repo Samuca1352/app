@@ -1,6 +1,13 @@
 <template>
   <div>
-
+<header>
+   <h1 v-if="$slots.title">
+  <slot name="title" >
+    
+  </slot>
+  </h1>
+<slot name="dsc"></slot>
+</header>
 
   </div>
  
@@ -71,29 +78,6 @@ export default {
   // para liberar memória
 
 //HOOKS
-
-beforeCreate(){
-    console.log('beforeCreate')
-},
-created(){
-  console.log('created')
-},
-beforeMount(){
-  console.log('beforeMount')
-
-},
-mounted(){
-  console.log('mounted')
-
-},
-beforeUnmount(){
-  console.log('beforeUnmount')
-  
-  },
-unmounted(){
-  console.log('unmounted')
-
-},
 
 
 
