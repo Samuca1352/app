@@ -3,7 +3,7 @@
         
     <slot/>
         
-
+    <button @click="onClick()">X</button>
 
     </div>
 </template>
@@ -17,10 +17,7 @@ export default {
             default:''
 
         },
-         text:{
-            type: String,
-            default:'test'
-        }
+         
     },
     computed:{
         baseClass(){
@@ -32,6 +29,12 @@ export default {
 
             ]
         }
+    },
+    methods:{
+        onClick(){
+            this.$emit('close'),
+            console.log('closou')
+        }
     }
 }
 </script>
@@ -40,6 +43,8 @@ export default {
 
 <style scoped>
     .alert{
+        display: flex;
+        justify-content: space-between;
         padding: 6px;
         font-size: larger;
         border-radius: 5px;

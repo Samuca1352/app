@@ -1,31 +1,37 @@
 <template>
   <div>
-    
-    
-    <BaseAlert :variant="variant" >Olá Mundo</BaseAlert> 
+    <BaseAlert v-if="showAlert" :variant="variant" @close="onClose()"
+      >Olá Mundo</BaseAlert
+    >
   </div>
 </template>
 
 <script>
-
-import BaseAlert from '@/components/BaseAlert';
-
+import BaseAlert from "@/components/BaseAlert";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    BaseAlert
-    
+    BaseAlert,
   },
 
-  data(){
-    return{
-      variant:'success'
-    }
-  }
+//pai->filho     filho->pai
+// props          emit
 
 
-}
+  data() {
+    return {
+      showAlert: true,
+      variant: "success",
+    };
+  },
+  methods: {
+    onClose() {
+      this.showAlert = false;
+      console.log(this.showAlert);
+    },
+  },
+};
 </script>
 
 <style>
