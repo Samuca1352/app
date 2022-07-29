@@ -1,27 +1,21 @@
 <template>
   <div>
-    <div>
-      {{ fullName }}
+    <input type="text" v-model="mname"> <br>
+     {{ mname }}
+ <br><br><br>
+    <div class="mb-3">
+      <label for="" class="form-label">City</label>
+      <br>
+      <select class="form-control" v-model="pageCount" name="" id="">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
     </div>
+    {{pageCount}}
 
-    <div>
-      <input v-model="user.first_name" type="text" name="" id="" />
-    </div>
-    <br /><br /><br />
-    <h1>Todos em aberto</h1>
-    <div v-for="todo in uncompleted" :key="todo.id">
-      {{ todo.title }}
-    </div>
-    <h1>Todos completas</h1>
-    <div v-for="todo in completed" :key="todo.id">
-      {{ todo.title }}
-    </div>
-    <h1>Todos</h1>
-    <div v-for="todo in todos" :key="todo.id">
-      <input type="checkbox" v-model="todo.completed" name="" id="" />
-      {{ todo.title }}
-    </div>
   </div>
+ 
 </template>
 
 <script>
@@ -29,12 +23,8 @@ export default {
   name: "App",
   data() {
     return {
-      teste: "teste",
-
-      user: {
-        first_name: "Samuel",
-        last_name: "Damasceno",
-      },
+      mname:'Samuel',
+      pageCount: 5,
       todos: [
         {
           userId: 1,
@@ -77,19 +67,29 @@ export default {
     };
   },
 
-  methods: {},
-  computed: {
-    fullName() {
-      return `${this.user.first_name} ${this.user.last_name}`;
-    },
-    uncompleted() {
-      return this.todos.filter((todo) => !todo.completed);
-    },
-    completed() {
-      return this.todos.filter((todo) => todo.completed);
-    },
+  methods: {//funçoes para serem usadas
+  saveUser(){
+      console.log(this.mname);
+  }
   },
-};
+  computed: {//funçoes que gastam menos processamento e atualizam sempre
+
+  },
+  watch: {//observadores
+    mname(vl){
+        if(vl.length >= 3){
+       this.saveUser()
+        }
+        
+
+    },
+
+    pageCount(){
+        console.log('Ajax changed');
+    }
+
+  }
+  };
 </script>
 
 <style>
