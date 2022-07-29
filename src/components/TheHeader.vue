@@ -1,18 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="mname"> <br>
-     {{ mname }}
- <br><br><br>
-    <div class="mb-3">
-      <label for="" class="form-label">City</label>
-      <br>
-      <select class="form-control" v-model="pageCount" name="" id="">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-      </select>
-    </div>
-    {{pageCount}}
+
 
   </div>
  
@@ -24,7 +12,6 @@ export default {
   data() {
     return {
       mname:'Samuel',
-      pageCount: 5,
       todos: [
         {
           userId: 1,
@@ -67,26 +54,57 @@ export default {
     };
   },
 
+
+// Criação
+  // Preparar o componente 
+  // Ajax, inicializar algumas variáveis
+  // Não tem acesso ao template (DOM) 
+// Montagem
+  // Inicializar um lib externa (new Lib()) 
+  // Precisa de acesso ao template (DOM)
+  // Tem acesso ao template (DOM) 
+// Atualização
+  // Debug
+  // Update 
+// Desmontagem
+  // Remover tudo o que for ncessário (lib->destroy() 
+  // para liberar memória
+
+//HOOKS
+
+beforeCreate(){
+    console.log('beforeCreate')
+},
+created(){
+  console.log('created')
+},
+beforeMount(){
+  console.log('beforeMount')
+
+},
+mounted(){
+  console.log('mounted')
+
+},
+beforeUnmount(){
+  console.log('beforeUnmount')
+  
+  },
+unmounted(){
+  console.log('unmounted')
+
+},
+
+
+
   methods: {//funçoes para serem usadas
-  saveUser(){
-      console.log(this.mname);
-  }
+ 
   },
   computed: {//funçoes que gastam menos processamento e atualizam sempre
 
   },
   watch: {//observadores
-    mname(vl){
-        if(vl.length >= 3){
-       this.saveUser()
-        }
-        
-
-    },
-
-    pageCount(){
-        console.log('Ajax changed');
-    }
+   
 
   }
   };
