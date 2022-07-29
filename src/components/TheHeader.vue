@@ -1,50 +1,94 @@
 <template>
   <div>
     <div>
-        <button @click.stop.prevent="onclick">
-            Enviar
-        </button>
-</div>
-<div @mouseover="onMouseover" @mouseout="onMouseout">
-    Mouse over
-</div>
+      {{ fullName }}
+    </div>
 
-    <form action="google.com"
-     @submit.prevent="onSubmit">
-     <input @keyup="keyUp" type="text">
-     <button type="submit">Submit</button>
-     </form>
-
+    <div>
+      <input v-model="user.first_name" type="text" name="" id="" />
+    </div>
+    <br /><br /><br />
+    <h1>Todos em aberto</h1>
+    <div v-for="todo in uncompleted" :key="todo.id">
+      {{ todo.title }}
+    </div>
+    <h1>Todos completas</h1>
+    <div v-for="todo in completed" :key="todo.id">
+      {{ todo.title }}
+    </div>
+    <h1>Todos</h1>
+    <div v-for="todo in todos" :key="todo.id">
+      <input type="checkbox" v-model="todo.completed" name="" id="" />
+      {{ todo.title }}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: "App",
   data() {
     return {
-      name: 'Samuel',
-      
-    }
+      teste: "teste",
+
+      user: {
+        first_name: "Samuel",
+        last_name: "Damasceno",
+      },
+      todos: [
+        {
+          userId: 1,
+          id: 1,
+          title: "delectus aut autem",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 2,
+          title: "quis ut nam facilis et officia qui",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 3,
+          title: "fugiat veniam minus",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 4,
+          title: "et porro tempora",
+          completed: true,
+        },
+        {
+          userId: 1,
+          id: 5,
+          title:
+            "laboriosam mollitia et enim quasi adipisci quia provident illum",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 6,
+          title: "qui ullam ratione quibusdam voluptatem quia omnis",
+          completed: false,
+        },
+      ],
+    };
   },
 
-  methods:{
-    onclick(){
-        console.log('click');
+  methods: {},
+  computed: {
+    fullName() {
+      return `${this.user.first_name} ${this.user.last_name}`;
     },
-    onMouseover(){
-        console.log('mouse over')
+    uncompleted() {
+      return this.todos.filter((todo) => !todo.completed);
     },
-    onMouseout(){
-        console.log('mouse out')
+    completed() {
+      return this.todos.filter((todo) => todo.completed);
     },
-    onSubmit(){
-        console.log('submit')
-    },
-    keyUp($evt){
-        console.log('onKeyUp',$evt)
-    }
-  }
-
+  },
 };
 </script>
 

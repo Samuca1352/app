@@ -18,7 +18,9 @@ export default {
   components: {
 
     TheHeader //tem que importar e declarar em components
-  }
+  },
+
+
 }
 </script>
 
