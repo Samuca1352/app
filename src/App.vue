@@ -3,14 +3,28 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/usuarios/10">Usuário</router-link> |
-    <router-link :to="{name: 'servicos'}">Serviços</router-link>
-
+    <router-link :to="{ name: 'servicos' }">Serviços</router-link>
   </nav>
-  <router-view/>
+  <button @click="updateUser()">Atualizar perfil</button>
+  <router-view />
 </template>
 
 
-
+<script>
+export default {
+  created() {},
+  methods: {
+    updateUser() {
+      const newUser = {
+        first_name: "Samuel",
+        last_name: "cardoso",
+        email: "samuel@samucaaa.com",
+      };
+      this.$store.commit("storeUser", newUser);
+    },
+  },
+};
+</script>
 
 <style>
 #app {
