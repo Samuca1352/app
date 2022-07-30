@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -24,7 +24,13 @@ const routes = [
     path: '/usuarios/:id',
     name:'usuarios-editar',
     component:()=> import('../views/UserEditView.vue')
-  }
+  },
+  {
+    path: '/',
+    name:'products',
+    component:()=> import('../views/UserEditView.vue')
+  },
+  
 ]
 
 const router = createRouter({
