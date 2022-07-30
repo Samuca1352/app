@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: HomeView
   },
@@ -26,9 +26,9 @@ const routes = [
     component:()=> import('../views/UserEditView.vue')
   },
   {
-    path: '/',
+    path: '/products',
     name:'products',
-    component:()=> import('../views/UserEditView.vue')
+    component:()=> import('../components/Products/AppProducts.vue')
   },
   
 ]

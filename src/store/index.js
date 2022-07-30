@@ -11,17 +11,20 @@ export default createStore({
       {
         id:1,
         name:'bola',
-        price:100
+        price:100,
+        qtd: 1
       },
       {
         id:2,
         name:'camisa',
-        price:50
+        price:50,
+        qtd: 1
       },
       {
         id:3,
         name:'rede',
-        price:20
+        price:20,
+        qtd: 1
       }
     ]
     ,
@@ -34,8 +37,28 @@ export default createStore({
       state.user=data
     },
     addProduct(state,data){
-      state.cart.push(data)
-    }
+      let index = state.cart.indexOf(data);
+      if(index<0){
+        state.cart.push(data)
+      }
+      else{
+        state.cart[index].qtd++;
+        /* console.log(state.cart[index].qtd) */
+      }
+      
+    },
+    removeProduct(state,data){
+      let index = state.cart.indexOf(data);
+      /* console.log(index) */
+      if(state.cart[index].qtd<=1){
+        state.cart.splice(index,1);
+       /*  console.log('removido') */
+      }
+      else{
+        state.cart[index].qtd--;
+       /*  console.log(state.cart[index].qtd) */
+      }
+    },
   },
   getters: {
   },

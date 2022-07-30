@@ -1,21 +1,20 @@
 <template>
-<!--  <nav>
+ <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/usuarios/10">Usuário</router-link> |
+    <router-link :to="{ name: 'products'}">Produtos</router-link> |
     <router-link :to="{ name: 'servicos' }">Serviços</router-link>
   </nav>
-  <router-view /> -->
-  <AppProducts/>
-  
-<br><br>
-  <button @click="updateUser()">Atualizar perfil</button>
+  <router-view />
+
+  <i class="bi bi-cart"></i>
 
 </template>
 
 
 <script>
-import AppProducts from "./components/Products/AppProducts.vue";
+
 export default {
     created() { },
     methods: {
@@ -28,7 +27,7 @@ export default {
             this.$store.commit("storeUser", newUser);
         },
     },
-    components: { AppProducts }
+  
 };
 </script>
 
