@@ -4,11 +4,12 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/usuarios/10">Usuário</router-link> |
     <router-link :to="{ name: 'products'}">Produtos</router-link> |
-    <router-link :to="{ name: 'servicos' }">Serviços</router-link>
+    <router-link :to="{ name: 'servicos' }">Serviços</router-link> |
+    <router-link to="/carrinho">Carrinho</router-link>
   </nav>
   <router-view />
 
-  <i class="bi bi-cart"></i>
+
 
 </template>
 
