@@ -21,7 +21,7 @@ const routes = [
     component:()=> import('../views/ServicesView.vue')
   },
   {
-    path: '/usuarios/:id',
+    path: '/usuarios',
     name:'usuarios-editar',
     component:()=> import('../views/UserEditView.vue')
   },
