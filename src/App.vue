@@ -1,30 +1,28 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" permanent >
+    <v-navigation-drawer v-model="drawer" app>
       
       <!--  -->
-      <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-        <v-list-item link to="/">
-          <v-list-item-title >Inicio</v-list-item-title>
-        </v-list-item>
+<v-list>
+        <v-list-item
+          v-for="[icon, text, link] in links"
+          :key="icon"
+          link
+          :to="link"
+        >
+          <v-list-item-icon>
+            <v-icon>{{ icon }}</v-icon>
+          </v-list-item-icon>
 
-        <v-list-item to="/servicos" link>
-          <v-list-item-title>Serviços</v-list-item-title>
+          <v-list-item-content>
+            <v-list-item-title>{{ text }}</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
-
-        <v-list-item to="/carrinho" link>
-          <v-list-item-title>Carrinho</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item to="/usuarios" link>
-          <v-list-item-title>Usuarios</v-list-item-title>
-        </v-list-item>
-
+      </v-list>
+      
         <v-list-item @click="barra2 = !barra2" link >
           <v-list-item-title>Teste Gaveta</v-list-item-title>
         </v-list-item>
-
-      </v-list-item-group>
     </v-navigation-drawer>
     <v-navigation-drawer v-model="barra2" temporary>
       <!-- Barra 2 -->
@@ -42,10 +40,10 @@
       </v-list-item>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app >
       <v-app-bar-nav-icon @click="this.drawer = !this.drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>App</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -62,7 +60,13 @@ export default {
   created() { },
   data: () => ({
     drawer: false,
-    barra2: false
+    barra2: false,
+    links: [
+        ['mdi-home', 'Inicio', '/'],
+        ['mdi-cart', 'Carrinho', '/carrinho'],
+        ['mdi-pipe-wrench', 'Serviços', '/servicos'],
+        ['mdi-account', 'Usuarios', '/usuarios'],
+      ],
   }),
   methods: {
     updateUser() {
