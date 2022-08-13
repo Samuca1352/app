@@ -30,7 +30,8 @@ export default createStore({
     ,
       cart: [
         
-      ]
+      ],
+      drawer: true
   },
   mutations: {
     storeUser(state, data){

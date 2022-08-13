@@ -16,7 +16,7 @@
     "roboto-fontface": "*",
     "vue": "^3.2.37",
     "vue-router": "^4.0.3",
-    "vuetify": "npm:@vuetify/nightly@next",
+    "vuetify": "npm:@vuetify/nightly@^3.0.0-next-20220812.0",
     "vuex": "^4.0.0",
     "webfontloader": "^1.0.0"
   },

@@ -20,20 +20,32 @@ const routes = [
     name:'servicos',
     component:()=> import('../views/ServicesView.vue')
   },
-  {
-    path: '/usuarios',
-    name:'usuarios-editar',
-    component:()=> import('../views/UserEditView.vue')
-  },
+
   {
     path: '/products',
     name:'products',
     component:()=> import('../components/Products/AppProducts.vue')
   },
-  {  path: '/carrinho',
-    name:'carrinho',
-    component:()=> import('../views/CarrinhoView.vue')
-  },
+
+  {  path: '/lotes',
+  name:'lotes',
+  component:()=> import('../views/LotesView.vue')
+},
+{  path: '/parceiro',
+name:'parceiro',
+component:()=> import('../views/ParceirosView.vue')
+},
+{  path: '/sangrias',
+name:'Sangrias',
+component:()=> import('../views/SangriasView.vue')
+},
+{  path: '/propriedades',
+name:'Propriedades',
+component:()=> import('../views/PropriedadesView.vue')
+},
+
+
+
   
 ]
 
