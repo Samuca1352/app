@@ -1,15 +1,19 @@
 <template>
-  <v-app id="inspire">
+
+  <v-app>
+
     <NavigationDrawer></NavigationDrawer>
     
     <v-app-bar app>
       <AppBar></AppBar>
     </v-app-bar>
 
-    <v-main>
+    <v-main absolute>
       <routerView></routerView>
     </v-main>
+    
   </v-app>
+  
 </template>
 
 

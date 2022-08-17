@@ -17,36 +17,45 @@ const routes = [
   },
   {
     path: '/servicos',
-    name:'servicos',
-    component:()=> import('../views/ServicesView.vue')
+    name: 'servicos',
+    component: () => import('../views/ServicesView.vue')
   },
 
   {
     path: '/products',
-    name:'products',
-    component:()=> import('../components/Products/AppProducts.vue')
+    name: 'products',
+    component: () => import('../components/Products/AppProducts.vue')
   },
 
-  {  path: '/lotes',
-  name:'lotes',
-  component:()=> import('../views/LotesView.vue')
-},
-{  path: '/parceiro',
-name:'parceiro',
-component:()=> import('../views/ParceirosView.vue')
-},
-{  path: '/sangrias',
-name:'Sangrias',
-component:()=> import('../views/SangriasView.vue')
-},
-{  path: '/propriedades',
-name:'Propriedades',
-component:()=> import('../views/PropriedadesView.vue')
-},
+  {
+    path: '/lotes',
+    name: 'lotes',
+    component: () => import('../views/LotesView.vue')
+  },
+  {
+    path: '/parceiro',
+    name: 'parceiro',
+    component: () => import('../views/ParceirosView.vue')
+  },
+  {
+    path: '/sangrias',
+    name: 'Sangrias',
+    component: () => import('../views/SangriasView.vue')
+  },
+  {
+    path: '/propriedades/',
+    name: 'Propriedades',
+    component: () => import('../views/PropriedadesView.vue')
+  },
+  {
+    path: '/propriedades/incluir',
+    name: 'IncluirProp',
+    component: () => import('../views/IncluirView.vue')
+  },
 
 
 
-  
+
 ]
 
 const router = createRouter({

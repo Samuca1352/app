@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar-nav-icon @click="this.$store.state.user = !this.$store.state.user"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="this.$store.state.drawer = !this.$store.state.drawer"></v-app-bar-nav-icon>
 
     <v-toolbar-title>Sistema Gestão Seringueiras</v-toolbar-title>
 
