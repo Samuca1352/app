@@ -2,7 +2,7 @@
 
   <v-app>
 
-    <NavigationDrawer></NavigationDrawer>
+    <NavigationDrawer ></NavigationDrawer>
     
     <v-app-bar app>
       <AppBar></AppBar>
