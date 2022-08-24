@@ -1,6 +1,6 @@
 <template>
 
-  <v-app>
+  <v-app >
 
     <NavigationDrawer ></NavigationDrawer>
     
@@ -8,8 +8,10 @@
       <AppBar></AppBar>
     </v-app-bar>
 
-    <v-main absolute>
-      <routerView></routerView>
+    <v-main absolute transition="scroll-y-transition">
+      
+      <routerView  ></routerView>
+     
     </v-main>
     
   </v-app>
@@ -35,6 +37,10 @@ export default {
       };
       this.$store.commit("storeUser", newUser);
     },
+
+
+  },
+  watch:{
 
   },
   components: { NavigationDrawer, AppBar },

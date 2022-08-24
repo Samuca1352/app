@@ -4,54 +4,64 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
   },
   {
-    path: '/about',
+  path: '/index',
+  name: 'index',
+  component: HomeView
+},
+{
+  path: '/cadastro',
+  name: 'cadastro',
+ component: () => import(/* webpackChunkName: "about" */ '../components/register/Registro.vue')
+},
+{
+  path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/servicos',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+},
+{
+  path: '/servicos',
     name: 'servicos',
-    component: () => import('../views/ServicesView.vue')
-  },
+      component: () => import('../views/ServicesView.vue')
+},
 
-  {
-    path: '/products',
+{
+  path: '/products',
     name: 'products',
-    component: () => import('../components/Products/AppProducts.vue')
-  },
+      component: () => import('../components/Products/AppProducts.vue')
+},
 
-  {
-    path: '/lotes',
+{
+  path: '/lotes',
     name: 'lotes',
-    component: () => import('../views/LotesView.vue')
-  },
-  {
-    path: '/parceiro',
+      component: () => import('../views/LotesView.vue')
+},
+{
+  path: '/parceiro',
     name: 'parceiro',
-    component: () => import('../views/ParceirosView.vue')
-  },
-  {
-    path: '/sangrias',
+      component: () => import('../views/ParceirosView.vue')
+},
+{
+  path: '/sangrias',
     name: 'Sangrias',
-    component: () => import('../views/SangriasView.vue')
-  },
-  {
-    path: '/propriedades/',
+      component: () => import('../views/SangriasView.vue')
+},
+{
+  path: '/propriedades/',
     name: 'Propriedades',
-    component: () => import('../views/PropriedadesView.vue')
-  },
-  {
-    path: '/propriedades/incluir',
+      component: () => import('../views/PropriedadesView.vue')
+},
+{
+  path: '/propriedades/incluir',
     name: 'IncluirProp',
-    component: () => import('../views/IncluirView.vue')
-  },
+      component: () => import('../views/IncluirView.vue')
+},
 
 
 
