@@ -1,51 +1,62 @@
 <template>
 
-  <v-app >
+  <v-app>
 
-    <NavigationDrawer ></NavigationDrawer>
-    
-    <v-app-bar app>
-      <AppBar></AppBar>
+    <NavigationDrawer v-if="isLoggedIn"></NavigationDrawer>
+
+    <v-app-bar v-if="isLoggedIn" app>
+      <AppBar ></AppBar>
     </v-app-bar>
 
     <v-main absolute transition="scroll-y-transition">
       
-      <routerView  ></routerView>
-     
+      <routerView></routerView>
+
     </v-main>
-    
+
   </v-app>
-  
+
 </template>
 
 
-<script>
+<script setup>
 import NavigationDrawer from "./components/NavigationDrawer.vue";
 import AppBar from "./components/AppBar.vue";
+import { onMounted, ref } from "vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+/* import { getAuth, updateProfile } from "firebase/auth";
+const auth = getAuth();
+updateProfile(auth.currentUser, {
+  displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+}).then(() => {
+  // Profile updated!
+  // ...
+}).catch(() => {
+  // An error occurred
+  // ...
+}); */
+
+const isLoggedIn = ref(false);
 
 
-export default {
-  created() { },
-  data: () => ({
-  }),
-  methods: {
-    updateUser() {
-      const newUser = {
-        first_name: "Samuel",
-        last_name: "cardoso",
-        email: "samuel@samucaaa.com",
-      };
-      this.$store.commit("storeUser", newUser);
-    },
+  let auth;
+
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  })
+}
+
+)
 
 
-  },
-  watch:{
 
-  },
-  components: { NavigationDrawer, AppBar },
-
-};
 </script>
 
 <style>

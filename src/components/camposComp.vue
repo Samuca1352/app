@@ -1,3 +1,4 @@
+
 <template>
   <div class="register">
     <div class="form">
@@ -13,63 +14,61 @@
           </v-row>
         </v-row>
       </v-container>
+
+      <h5>Cadastre-se para ver fotos e vídeos dos seus amigos.</h5>
+      <v-btn class="btn-firt" @click="signInWithGoogle">Entrar com o Google</v-btn>
       <br />
       <v-divider>ou</v-divider>
       <div class="input-form">
-        <input type="text" v-model="email" placeholder="Email" />
+        <input type="email" v-model="email" placeholder="Insira seu email" />
         <input type="password" v-model="password" placeholder="Senha" />
       </div>
-      <p v-if="errMsg">{{ errMsg }}</p>
-      <v-btn @click="register" class="btn-register">Login</v-btn>
+      <div>
+        <div class="text-register">
+          Ao se cadastrar, você concorda com nossos
+          <b>Termos, Politicas de Privacidade e Politica de Cookies</b>
+        </div>
+      </div>
+      <v-btn class="btn-register mb-3" @click="register">Cadastre-se</v-btn>
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'camposComp'
-}
 
-import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+<script setup>
+import {ref} from "vue";
+import {getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import router from "@/router";
 const email = ref("");
 const password = ref("");
-const errMsg = ref()//error message
 
-const register = () => {
-  signInWithEmailAndPassword(getAuth(), email.value, password.value)
+const register = ()=>{
+  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
 
-    .then((data) => {
-      console.log(data, 'you signed');
-      router.push('/index')
+  .then((data) => {
+    console.log(data);
+    router.push('/')
 
-    })
-    .cath((error) => {
-      console.log(error.code);
-      switch (error.code) {
-        case "auth/invalid-email":
-          errMsg.value = "Email Inválido";
-
-          break;
-        case "auth/user-not-found":
-          errMsg.value = "Nenhuma conta encontrada com este endereço de Email"
-          break;
-        case "auth/wrong-password":
-          errMsg.value = "Senha Incorreta";
-          break;
-
-        default:
-          errMsg.value = "Email ou Senha Incorretos";
-          break;
-      }
-    })
+  })
+  .cath((error)=>{
+    console.log(error.code);
+    alert(error.message)
+  })
 
 };
 
-/* const signInWithGoogle = () => {
+const signInWithGoogle = ()=>{
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+  .then((result)=>{
+    console.log(result.user);
+    router.push("/index")
+  }).catch(()=>{
 
-}; */
+  })
+};
 </script>
+
 <style scoped>
 .space {
   padding-left: 1rem;

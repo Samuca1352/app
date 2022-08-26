@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const routes = [
   {
@@ -8,69 +9,120 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
   },
   {
-  path: '/index',
-  name: 'index',
-  component: HomeView
-},
-{
-  path: '/cadastro',
-  name: 'cadastro',
- component: () => import(/* webpackChunkName: "about" */ '../components/register/Registro.vue')
-},
-{
-  path: '/about',
+    path: '/index',
+    name: 'index',
+    component: HomeView,
+    meta: {
+      requiresAuth: true,
+
+    }
+  },
+  {
+    path: '/cadastro',
+    name: 'cadastro',
+    component: () => import(/* webpackChunkName: "about" */ '../views/RegistroView.vue')
+  },
+  {
+    path: '/about',
     name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-},
-{
-  path: '/servicos',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/servicos',
     name: 'servicos',
-      component: () => import('../views/ServicesView.vue')
-},
+    component: () => import('../views/ServicesView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
 
-{
-  path: '/products',
+  {
+    path: '/products',
     name: 'products',
-      component: () => import('../components/Products/AppProducts.vue')
-},
+    component: () => import('../components/Products/AppProducts.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
 
-{
-  path: '/lotes',
+  {
+    path: '/lotes',
     name: 'lotes',
-      component: () => import('../views/LotesView.vue')
-},
-{
-  path: '/parceiro',
+    component: () => import('../views/LotesView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/parceiro',
     name: 'parceiro',
-      component: () => import('../views/ParceirosView.vue')
-},
-{
-  path: '/sangrias',
+    component: () => import('../views/ParceirosView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/sangrias',
     name: 'Sangrias',
-      component: () => import('../views/SangriasView.vue')
-},
-{
-  path: '/propriedades/',
+    component: () => import('../views/SangriasView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/propriedades/',
     name: 'Propriedades',
-      component: () => import('../views/PropriedadesView.vue')
-},
-{
-  path: '/propriedades/incluir',
+    component: () => import('../views/PropriedadesView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/propriedades/incluir',
     name: 'IncluirProp',
-      component: () => import('../views/IncluirView.vue')
-},
-
-
-
-
+    component: () => import('../views/IncluirView.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+const getCurrentUser =() =>{
+  return new Promise((resolve,reject)=>{
+    const removeListener= onAuthStateChanged(
+      getAuth,
+      (user)=>{
+        removeListener();
+        resolve(user);
+      },
+      reject
+    )
+  })
+};
+
+
+router.beforeEach(async(to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if ( getCurrentUser()) {
+      next();
+    } else {
+      alert("você não tem permissão para acessar essa página!");
+      next("/")
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

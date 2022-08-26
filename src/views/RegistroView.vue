@@ -2,12 +2,12 @@
   <v-app>
     <v-main class="body">
       <v-sheet class="box-container"
-  height="640"
+  height="auto"
   width="270"
 >
 <v-sheet
   color="white"
-  height="500"
+  height="auto"
   width="250"
 >
 <CamposComp></CamposComp>
@@ -17,15 +17,15 @@
   height="60"
   width="250"
 >
-<p>Tem uma conta? <a href="#"> Conecte-se</a></p>
+<p>Tem uma conta? <v-btn variant="plain" size="small" to="/"> Conecte-se</v-btn></p>
 </v-sheet>
 </v-sheet>
     </v-main>
   </v-app>
 </template>
 
-<script>
-import CamposComp from './camposComp.vue';
+<script >
+import CamposComp from '@/components/camposComp.vue';
 
 export default {
   name: 'App',

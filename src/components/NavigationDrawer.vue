@@ -5,10 +5,9 @@
     <!--  -->
     <v-list active-color="blue" class="responsiveMenu">
       <v-list>
-        <v-list-item
-          prepend-avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4dF33jefjDX7UPxDslVeoh0cdAdZDivH9GU9yXjQSUCj0rBl5itvzlyRHF7xS8PCTkQE&usqp=CAU"
-          title="Samuel Damasceno" nav>
-        </v-list-item>
+        <v-list-item :prepend-avatar="photoURL"
+          :title="displayName"
+           nav></v-list-item>
       </v-list>
       <v-list-item v-for="[icon, text, link] in links" @click="cleanSelect()" :key="icon" link :to="link"
         :prepend-icon="icon" :title="text" >
@@ -51,10 +50,40 @@
 
 </template>
 
-<script>
+<script setup>
+import { onMounted, ref } from "vue";
+import { getAuth } from "firebase/auth";
+  const displayName = ref();
+  const photoURL = ref("http://cdn.onlinewebfonts.com/svg/img_568656.png");
+
+onMounted(()=>{
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+  displayName.value = user.displayName; 
+   photoURL.value = user.photoURL;
+   //console.log(user.emailVerified)
+  //const emailVerified = user.emailVerified; 
+})
+</script>
+<script >
+
+
+
+ //if (user !== null) {
+  //displayName.value = user.displayName;
+  // The user object has basic properties such as display name, email, etc.
+  /* const email = user.email;
+
+  // The user's ID, unique to the Firebase project. Do NOT use
+  // this value to authenticate with your backend server, if
+  // you have one. Use User.getToken() instead.
+  //const uid = user.uid;
+ //}*/
 
 export default {
   data: () => ({
+
     rw: "220",
     drawer: true,
     active: false,
@@ -69,6 +98,7 @@ export default {
     ],
   }),
   methods: {
+
 
     gaveta() {
       this.barra2 = !this.barra2;

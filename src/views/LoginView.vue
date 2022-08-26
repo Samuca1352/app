@@ -2,22 +2,25 @@
   <v-app>
     <v-main class="body">
       <v-sheet class="box-container"
-  height="420"
+  height="auto"
   width="270"
 >
 <v-sheet
   color="white"
-  height="300"
+  height="auto"
   width="250"
 >
-<CamposComp></CamposComp>
+<CompLogin></CompLogin>
 </v-sheet>
 <v-sheet class="box-bottom"
   color="white"
   height="60"
   width="250"
 >
-<p><a to="/cadastro"> Cadastre-se</a></p>
+<div class="d-flex justify-center">
+
+  <v-btn variant="text" to="/cadastro" > Cadastre-se</v-btn>
+</div>
 </v-sheet>
 </v-sheet>
     </v-main>
@@ -25,13 +28,13 @@
 </template>
 
 <script>
-import CamposComp from '@/components/camposComp.vue';
+import CompLogin from '@/components/CompLogin.vue';
 
 export default {
   name: 'App',
 
   components: {
-    CamposComp
+    CompLogin
 },
   data: () => ({
     //

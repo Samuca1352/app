@@ -7,32 +7,53 @@
     <v-menu transition="slide-y-transition">
         <template v-slot:activator="{ props }">
             <v-list-item v-bind="props"
-                prepend-avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4dF33jefjDX7UPxDslVeoh0cdAdZDivH9GU9yXjQSUCj0rBl5itvzlyRHF7xS8PCTkQE&usqp=CAU">
+                :prepend-avatar="photoURL">
             </v-list-item>
         </template>
         <v-list>
-            <v-list-item v-for="(item, i) in items" :key="i" link>
+            <v-list-item >
 
-                <v-list-item-title> {{ item.title }}</v-list-item-title>
+                <v-list-item-title> Perfil</v-list-item-title>
+            </v-list-item>
+                        <v-list-item @click="handleSignOut">
+
+                <v-list-item-title> Sair</v-list-item-title>
             </v-list-item>
         </v-list>
     </v-menu>
 
 </template>
 
-<script>
-export default {
-    data: () => ({
-        items: [
+<script setup>
+import { getAuth,signOut } from "@firebase/auth";
+import router from "@/router";
 
-            {
-                title: 'Perfil',
-                
-            },
+import { onMounted, ref } from "vue";
+  const displayName = ref();
+  const photoURL = ref();
 
-            { title: 'Sair',
-                },
-        ],
-    }),
-}
+onMounted(()=>{
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+  displayName.value = user.displayName; 
+   photoURL.value = user.photoURL;
+  //const emailVerified = user.emailVerified; 
+})
+
+
+let auth;
+  auth= getAuth();
+
+const handleSignOut =()=>{
+    signOut(auth).then(()=>{
+        router.push("/");
+       
+            
+        
+    }
+    
+    )
+};
+
 </script>
