@@ -5,12 +5,10 @@
     <!--  -->
     <v-list active-color="blue" class="responsiveMenu">
       <v-list>
-        <v-list-item :prepend-avatar="photoURL"
-          :title="displayName"
-           nav></v-list-item>
+        <v-list-item :prepend-avatar="photoURL" :subtitle="email" :title="displayName" nav></v-list-item>
       </v-list>
       <v-list-item v-for="[icon, text, link] in links" @click="cleanSelect()" :key="icon" link :to="link"
-        :prepend-icon="icon" :title="text" >
+        :prepend-icon="icon" :title="text">
       </v-list-item>
 
 
@@ -25,25 +23,25 @@
 
   </v-navigation-drawer>
 
-    <div v-if="barra2">
-      <v-navigation-drawer @click="barra2 = !barra2" v-model="barra2" style="z-index:1" permanent>
-        <!-- Barra 2 -->
+  <div v-if="barra2">
+    <v-navigation-drawer @click="barra2 = !barra2" v-model="barra2" style="z-index:1" permanent>
+      <!-- Barra 2 -->
 
-        <v-list-item @click="this.$store.state.drawer = !this.$store.state.drawer" to="/about">
-          Um
-        </v-list-item>
-        <v-list-item>
-          Dois
-        </v-list-item>
-        <v-list-item>
-          Três
-        </v-list-item>
-        <v-list-item>
-          Quatro
-        </v-list-item>
-      </v-navigation-drawer>
+      <v-list-item @click="this.$store.state.drawer = !this.$store.state.drawer" to="/about">
+        Um
+      </v-list-item>
+      <v-list-item>
+        Dois
+      </v-list-item>
+      <v-list-item>
+        Três
+      </v-list-item>
+      <v-list-item>
+        Quatro
+      </v-list-item>
+    </v-navigation-drawer>
 
-    </div>
+  </div>
 
 
 
@@ -53,33 +51,35 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { getAuth } from "firebase/auth";
-  const displayName = ref();
-  const photoURL = ref("http://cdn.onlinewebfonts.com/svg/img_568656.png");
+const displayName = ref();
+const photoURL = ref("http://cdn.onlinewebfonts.com/svg/img_568656.png");
+const email= ref()
 
-onMounted(()=>{
+onMounted(() => {
 
   const auth = getAuth();
   const user = auth.currentUser;
-  displayName.value = user.displayName; 
-   photoURL.value = user.photoURL;
-   //console.log(user.emailVerified)
-  //const emailVerified = user.emailVerified; 
+  displayName.value = (user.displayName)? user.displayName : user.email;
+  photoURL.value = (user.photoURL) ? user.photoURL : "http://cdn.onlinewebfonts.com/svg/img_568656.png";
+  email.value = (!user.displayName) ? '' : user.email;
+
+/*   console.log(user.displayName); */
 })
 </script>
 <script >
 
 
 
- //if (user !== null) {
-  //displayName.value = user.displayName;
-  // The user object has basic properties such as display name, email, etc.
-  /* const email = user.email;
+//if (user !== null) {
+//displayName.value = user.displayName;
+// The user object has basic properties such as display name, email, etc.
+/* const email = user.email;
 
-  // The user's ID, unique to the Firebase project. Do NOT use
-  // this value to authenticate with your backend server, if
-  // you have one. Use User.getToken() instead.
-  //const uid = user.uid;
- //}*/
+// The user's ID, unique to the Firebase project. Do NOT use
+// this value to authenticate with your backend server, if
+// you have one. Use User.getToken() instead.
+//const uid = user.uid;
+//}*/
 
 export default {
   data: () => ({

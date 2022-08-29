@@ -98,7 +98,7 @@ const router = createRouter({
   routes
 })
 
-const getCurrentUser =() =>{
+/* const getCurrentUser =() =>{
   return new Promise((resolve,reject)=>{
     const removeListener= onAuthStateChanged(
       getAuth,
@@ -112,13 +112,38 @@ const getCurrentUser =() =>{
 };
 
 
-router.beforeEach(async(to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if ( getCurrentUser()) {
       next();
     } else {
       alert("você não tem permissão para acessar essa página!");
       next("/")
+    }
+  } else {
+    next();
+  }
+}); */
+
+const getCurrentUser = () =>{
+  return new Promise((resolve,reject)=>{
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+    (user)=>{
+      removeListener();
+      resolve(user);
+    },
+    reject)
+  });
+};
+
+router.beforeEach(async (to,from, next)=>{
+  if (to.matched.some((record)=> record.meta.requiresAuth)) {
+    if (await getCurrentUser()) {
+      next();
+    } else {
+      alert("voce não tem permissão pra acessar esta página!");
+      next("/");
     }
   } else {
     next();

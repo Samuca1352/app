@@ -30,12 +30,18 @@
 
 
 import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import router from "@/router";
 /* import router from "@/router"; */
 const email = ref("");
 const password = ref("");
 const errMsg = ref()//error message
+
+
+
+
+
+
 
 const register = () => {
   const auth = getAuth();
@@ -44,7 +50,6 @@ const register = () => {
 
       console.log('success signed');
     }
-    console.log(auth.currentUser);
     router.push('/index');
   }).catch((error) =>{
     console.log(error.code);
