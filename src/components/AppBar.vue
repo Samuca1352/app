@@ -38,7 +38,6 @@ onMounted(()=>{
   const user = auth.currentUser;
   displayName.value = (user.displayName)? user.displayName: user.email; 
   photoURL.value = (user.photoURL)? user.photoURL:"http://cdn.onlinewebfonts.com/svg/img_568656.png";
-
   //const emailVerified = user.emailVerified; 
 })
 
