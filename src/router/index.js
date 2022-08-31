@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import store from '../store/index'
 
 const routes = [
   {
@@ -41,16 +42,6 @@ const routes = [
       requiresAuth: true,
     }
   },
-
-  {
-    path: '/products',
-    name: 'products',
-    component: () => import('../components/Products/AppProducts.vue'),
-    meta: {
-      requiresAuth: true,
-    }
-  },
-
   {
     path: '/lotes',
     name: 'lotes',
@@ -142,7 +133,7 @@ router.beforeEach(async (to,from, next)=>{
     if (await getCurrentUser()) {
       next();
     } else {
-      alert("voce não tem permissão pra acessar esta página!");
+      store.state.error = "Primeiro, Faça Login."
       next("/");
     }
   } else {

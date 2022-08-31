@@ -13,8 +13,8 @@
           </v-row>
         </v-row>
       </v-container>
-            <v-btn class="btn-firt mb-1"  @click="signInWithGoogle">Entrar com o Google</v-btn>
-    ou
+      <v-btn class="btn-firt mb-1" @click="signInWithGoogle">Entrar com o Google</v-btn>
+      ou
       <v-divider></v-divider>
       <div class="input-form">
         <input type="text" v-model="email" placeholder="Email" />
@@ -22,15 +22,16 @@
       </div>
       <v-btn @click="register" class="btn-register mb-3">Login</v-btn>
     </div>
-    <v-alert v-if="errMsg" type="error" class="mt-3 mx-auto mb-3" max-width="80%" >{{ errMsg }}</v-alert>
+    <v-alert v-if="$store.state.error" type="error" class="mt-3 mx-auto mb-3" closable>{{ $store.state.error }}</v-alert>
+    <v-alert v-if="errMsg" type="error" class="mt-3 mx-auto mb-3" max-width="80%">{{  errMsg  }}</v-alert>
   </div>
 </template>
 
 <script setup>
 
 
-import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { ref, onMounted } from "vue";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import router from "@/router";
 /* import router from "@/router"; */
 const email = ref("");
@@ -38,51 +39,67 @@ const password = ref("");
 const errMsg = ref()//error message
 
 
+const isLoggedIn = ref(false);
 
+
+let auth;
+
+onMounted(() => {
+  auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      router.push('/index')
+      isLoggedIn.value = true;
+    } else {
+      isLoggedIn.value = false;
+    }
+  })
+})
 
 
 
 
 const register = () => {
   const auth = getAuth();
-  signInWithEmailAndPassword(auth,email.value,password.value).then((data) =>{
-    if(data){
+  signInWithEmailAndPassword(auth, email.value, password.value).then((data) => {
+    if (data) {
 
       console.log('success signed');
     }
     router.push('/index');
-  }).catch((error) =>{
+  }).catch((error) => {
     console.log(error.code);
     switch (error.code) {
       case "auth/invalid-email":
         errMsg.value = "Email inválido";
         break;
-          case "auth/user-not-found":
+      case "auth/user-not-found":
         errMsg.value = "Não foi encontrado nenhuma conta com este email";
         break;
-              case "auth/wrong-password":
+      case "auth/wrong-password":
         errMsg.value = "Senha Incorreta";
         break;
-              
+
       default:
         errMsg.value = "Email ou senha incorretos";
         break;
     }
   });
 
-    
+
 
 };
 
-const signInWithGoogle = ()=>{
+const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)
-  .then((result)=>{
-    console.log(result.user);
-    router.push("/index")
-  }).catch(()=>{
+    .then((result) => {
+      console.log(result.user);
+      router.push("/index")
+    }).catch(() => {
 
-  })
+    })
 };
 </script>
 

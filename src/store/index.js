@@ -31,7 +31,8 @@ export default createStore({
       cart: [
         
       ],
-      drawer: true
+      drawer: true,
+      error:null,
   },
   mutations: {
     storeUser(state, data){

@@ -53,37 +53,31 @@ import { onMounted, ref } from "vue";
 import { getAuth } from "firebase/auth";
 const displayName = ref();
 const photoURL = ref("http://cdn.onlinewebfonts.com/svg/img_568656.png");
-const email= ref()
+const email = ref()
+
+
+
 
 onMounted(() => {
 
   const auth = getAuth();
   const user = auth.currentUser;
-  displayName.value = (user.displayName)? user.displayName : user.email;
+  displayName.value = (user.displayName) ? user.displayName : user.email;
   photoURL.value = (user.photoURL) ? user.photoURL : "http://cdn.onlinewebfonts.com/svg/img_568656.png";
   email.value = (!user.displayName) ? '' : user.email;
 
-/*   console.log(user.displayName); */
+  /*   console.log(user.displayName); */
 })
 </script>
 <script >
 
 
-
-//if (user !== null) {
-//displayName.value = user.displayName;
-// The user object has basic properties such as display name, email, etc.
-/* const email = user.email;
-
-// The user's ID, unique to the Firebase project. Do NOT use
-// this value to authenticate with your backend server, if
-// you have one. Use User.getToken() instead.
-//const uid = user.uid;
-//}*/
-
+var altura = window.screen.height;
+var largura = window.screen.width;
+console.log(altura);
+console.log(largura);
 export default {
   data: () => ({
-
     rw: "220",
     drawer: true,
     active: false,
@@ -98,8 +92,6 @@ export default {
     ],
   }),
   methods: {
-
-
     gaveta() {
       this.barra2 = !this.barra2;
       if (this.barra2) {

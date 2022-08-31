@@ -25,18 +25,6 @@ import AppBar from "./components/AppBar.vue";
 import { onMounted, ref } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-/* import { getAuth, updateProfile } from "firebase/auth";
-const auth = getAuth();
-updateProfile(auth.currentUser, {
-  displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
-}).then(() => {
-  // Profile updated!
-  // ...
-}).catch(() => {
-  // An error occurred
-  // ...
-}); */
-
 const isLoggedIn = ref(false);
 
 
@@ -44,6 +32,7 @@ const isLoggedIn = ref(false);
 
 onMounted(() => {
   auth = getAuth();
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
 
